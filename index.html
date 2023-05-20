@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/stylesheet.css">
+    <title>Code Quiz!!!</title>
+</head>
+
+<body>
+    <main>
+
+        <!-- a container displaying quiz title and a start button that will not be displayed after starting -->
+        <section class="startPage">
+            <h2>Coding Quiz Show!</h2>
+            <button id="startButton">Press to Start</button>
+        </section>
+
+        <!-- container for the quiz -->
+        <div class="quiz">
+            <h5 class="timer"></h5>
+            <!-- h3 is used to fill in questions -->
+            <h3 id="question">having a good time?</h3>
+            <!-- 4 buttons to represent the different multiple choice answers -->
+            <button id="a">A: no</button>
+            <button id="b">B: no</button>
+            <button id="c">C: no</button>
+            <button id="d">D: heck no</button>
+        </div>
+
+        <!-- container after timer runs out, displays your score earned and high scores from localstorage -->
+        <section class="endPage">
+            <!-- quix complete and score listed on left side of page, highscores on right with Flexbox -->
+            <div>
+                <h2>Quiz Complete!</h2>
+                <p>your highscore is :</p>
+            </div>
+            <div>
+                <a href="highscore.HTML">highscores page</a>
+            </div>
+        </section>
+
+    </main>
+    <script src="./assets/script.js"></script>
+</body>
+
+</html>
