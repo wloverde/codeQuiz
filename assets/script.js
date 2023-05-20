@@ -20,11 +20,11 @@ var timer;
 // Objects for Questions and Highscores
 var highScore = [
     {
-        name: andrew,
+        name: "andrew",
         score: 69
     },
     {
-        name: william,
+        name: "william",
         score: 420
     }
 ];
