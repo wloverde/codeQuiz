@@ -9,9 +9,9 @@ var timerEl = document.querySelector(".timer");
 var startButton = document.querySelector("#startButton");
 var questionEl = document.querySelector("#question");
 var buttonA = document.querySelector("#a");
-var buttonA = document.querySelector("#b");
-var buttonA = document.querySelector("#c");
-var buttonA = document.querySelector("#d");
+var buttonB = document.querySelector("#b");
+var buttonC = document.querySelector("#c");
+var buttonD = document.querySelector("#d");
 
 // Variable for timer visible on global scope
 var timeCount = 05;
@@ -20,12 +20,25 @@ var timer;
 // Objects for Questions and Highscores
 var highScore = [
     {
+        name: "william",
+        score: 420
+    },
+    {
         name: "andrew",
         score: 69
     },
     {
-        name: "william",
-        score: 420
+        name: "robert",
+        score: 360
+    }
+
+];
+
+var questions = [
+    {
+        question : "are you having a GREAT time?",
+        correct: "yes",
+        incorrect: ["nah", "nope", "never"]
     }
 ];
 
@@ -47,16 +60,20 @@ function endGame(){
 }
 
 function quizInit(){
+    questionEl.textContent = questions[0].question;
+    buttonA.textContent = "A: " + questions[0].correct;
+    buttonB.textContent = "B: " + questions[0].incorrect[0];
+    buttonC.textContent = "C: " + questions[0].incorrect[1];
+    buttonD.textContent = "D: " + questions[0].incorrect[2];
+
 
 }
 
-// add score to high score Object, create a Listed item for each key within object
+
+// add score to high score Object, sort by highest score to lowest
 function getHighScore(){
+    highScore.sort((a,b) => b.score - a.score);
     console.log(highScore);
-    for ( var i = 0; i < highScore.length; i++ ){
-        console.log(highScore[i]);
-        highScoresEl.appendChild(document.createElement("li").textContent = highScore[i]);
-    }
 
 }
 
