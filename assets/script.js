@@ -74,6 +74,11 @@ function quizInit(){
 function getHighScore(){
     highScore.sort((a,b) => b.score - a.score);
     console.log(highScore);
+    highScoresEl.children[0].textContent = highScore[0].name + " | " + highScore[0].score;
+    highScoresEl.children[1].textContent = highScore[1].name + " | " + highScore[1].score;
+    highScoresEl.children[2].textContent = highScore[2].name + " | " + highScore[2].score;
+    highScoresEl.children[3].textContent = highScore[3].name + " | " + highScore[3].score;
+    highScoresEl.children[4].textContent = highScore[4].name + " | " + highScore[4].score;
 
 }
 
