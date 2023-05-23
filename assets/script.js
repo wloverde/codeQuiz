@@ -8,14 +8,12 @@ var timerEl = document.querySelector(".timer");
 // Variables for functioning buttons for answering questions/starting game
 var startButton = document.querySelector("#startButton");
 var questionEl = document.querySelector("#question");
-var buttonA = document.querySelector("#a");
-var buttonB = document.querySelector("#b");
-var buttonC = document.querySelector("#c");
-var buttonD = document.querySelector("#d");
-
+var choicesEl = document.getElementById("choices");
+console.log(choicesEl);
 // Variable for timer visible on global scope
 var timeCount = 05;
 var timer;
+var score = 0;
 
 // Objects for Questions and Highscores
 var highScore = [
@@ -31,74 +29,92 @@ var highScore = [
         name: "robert",
         score: 360
     }
-
 ];
 
 var questions = [
     {
-        question : "are you having a GREAT time?",
-        correct: "yes",
-        incorrect: ["nah", "nope", "never"]
+        question: "are you having a GREAT time?",
+        answers: ["yes", "nah", "nope", "never"],
+        correct: "yes"
+    },
+    {
+        question: "this is neat?",
+        answers: ["very", "kinda", "sorta", "Most Definitely"],
+        correct: "Most Definitely"
     }
+    
 ];
 
 // function to start quiz and hide Start Page
-function startQuiz(){
+function startQuiz() {
     startPage.setAttribute("style", "display: none;");
     quizPage.setAttribute("style", "display: block;");
-
+    
     // Starts quiz and timer functions
     startTimer();
-    quizInit();
+    renderQuestion(); // calling counter before allowing user to answer
+    
 }
 
 // displays game score screen and highscores list
-function endGame(){
+function endGame() {
     quizPage.setAttribute("style", "display: none");
     endPage.setAttribute("style", "display: flex;justify-content: space-around;align-items: center;");
     getHighScore();
 }
 
-function quizInit(){
-    questionEl.textContent = questions[0].question;
-    buttonA.textContent = "A: " + questions[0].correct;
-    buttonB.textContent = "B: " + questions[0].incorrect[0];
-    buttonC.textContent = "C: " + questions[0].incorrect[1];
-    buttonD.textContent = "D: " + questions[0].incorrect[2];
+var counter = 0;
+function renderQuestion() {
+    questionEl.textContent = questions[counter].question;
+    choicesEl.innerHTML= "";
+    for (var i=0; i < questions[counter].answers.length; i++){
+        var option = questions[counter].answers[i];
+        var optionButton = document.createElement("button");
+        optionButton.setAttribute("value", option);
+        optionButton.textContent = (i+1) +". "+ questions[counter].answers[i];
+        choicesEl.appendChild(optionButton);
+    }
+}
 
-
+function quizClick(event) {
+    var buttonEl = event.target;
+    console.log(buttonEl);
+    console.log("button pressed: " + buttonEl.value + "\nAnswer: "+ questions[counter].correct );
+    if (questions[counter].correct === buttonEl.value){
+        counter++;
+        renderQuestion();
+    }
 }
 
 
 // add score to high score Object, sort by highest score to lowest
-function getHighScore(){
-    highScore.sort((a,b) => b.score - a.score);
-    console.log(highScore);
-    highScoresEl.children[0].textContent = highScore[0].name + " | " + highScore[0].score;
-    highScoresEl.children[1].textContent = highScore[1].name + " | " + highScore[1].score;
-    highScoresEl.children[2].textContent = highScore[2].name + " | " + highScore[2].score;
-    highScoresEl.children[3].textContent = highScore[3].name + " | " + highScore[3].score;
-    highScoresEl.children[4].textContent = highScore[4].name + " | " + highScore[4].score;
-
+function getHighScore() {
+    highScore.sort(function (a, b) {
+        return b.score - a.score
+    });
+    for (var i = 0; i < highScore.length; i++) {
+        highScoresEl.children[i].textContent = highScore[i].name + " | " + highScore[i].score;
+    }
 }
 
 // timer function for quiz. 
 function startTimer() {
-    timer = setInterval(function() {
+    timer = setInterval(function () {
         // decrements time and displays current time on page
-        timeCount --;
+        timeCount--;
         timerEl.textContent = "Seconds Remaining: " + timeCount;
-        
+
         if (timeCount >= 0) {
-            
+
         } else {
             clearInterval(timer);
             endGame();
         }
-         
+
     }, 1000);
 }
 
 
 // When I click the Start Button, the Timer Starts and the Quiz Displays
 startButton.addEventListener("click", startQuiz);
+choicesEl.onclick = quizClick;
