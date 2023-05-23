@@ -11,22 +11,52 @@ var questionEl = document.querySelector("#question");
 var choicesEl = document.getElementById("choices");
 console.log(choicesEl);
 // Variable for timer visible on global scope
-var timeCount = 05;
+var timeCount = 60;
 var timer;
 var score = 0;
 var counter = 0;
 
 var questions = [
     {
-        question: "are you having a GREAT time?",
-        answers: ["yes", "nah", "nope", "never"],
-        correct: "yes"
+        question: "Inside which HTML element do we put the JavaScript?",
+        answers: ["<javascript>", "<js>", "<script>", "<scripting>"],
+        correct: "<script>"
     },
     {
-        question: "this is neat?",
-        answers: ["very", "kinda", "sorta", "Most Definitely"],
-        correct: "Most Definitely"
-    }
+        question: "What is the correct JavaScript syntax to write \"Hello World\"?",
+        answers: ["response.write(\"Hello World\")", "\"Hello World\"", " document.write(\"Hello World\")", "(\"Hello World\")"],
+        correct: "document.write(\"Hello World\")"
+    },
+    {
+        question: "Where is the correct place to insert a JavaScript?",
+        answers: ["It is never correct", "Both the <head> section and the <body> section are correct", "The <body> section", "The <head> section"],
+        correct: "Both the <head> section and the <body> section are correct"
+    },
+    {
+        question: "An external JavaScript must contain the <script> tag",
+        answers: ["False", "True"],
+        correct: "False"
+    },
+    {
+        question: "How do you create a function?",
+        answers: ["function:myFunction()", "function=myFunction()", "function myFunction()", "myFunction():function"],
+        correct: "function myFunction()"
+    },
+    {
+        question: "How do you call a function named \"myFunction\"?",
+        answers: ["call myFunction()", "myFunction()", "call function myFunction", "Call.myFunction()"],
+        correct: "myFunction()"
+    },
+    {
+        question: "How do you write a conditional statement for executing some statements only if \"i\" is equal to 5?",
+        answers: ["if i=5", "if i=5 then", "if (i==5)", "if i==5 then"],
+        correct: "if (i==5)"
+    },
+    {
+        question: "How do you write a conditional statement for executing some statements only if \"i\" is NOT equal to 5?",
+        answers: ["if (i != 5)", "if =! 5 then", "if (i <> 5)", "if <>5"],
+        correct: "if (i != 5)"
+    },
 
 ];
 
@@ -102,15 +132,19 @@ function getHighScore() {
     }
 }
 
+
 // timer function for quiz. 
 function startTimer() {
     timer = setInterval(function () {
         // decrements time and displays current time on page
         timeCount--;
         timerEl.textContent = "Seconds Remaining: " + timeCount;
+        if (questions[counter].correct !== buttonEl.value) {
+            timeCount = timeCount-5;
+        }
 
         if (timeCount >= 0) {
-
+            timeCount = 0;
         } else {
             clearInterval(timer);
             endGame();

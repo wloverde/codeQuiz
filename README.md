@@ -20,3 +20,7 @@ THEN the game is over
 WHEN the game is over
 THEN I can save my initials and my score
 ```
+
+## Resources
+
+javascript questions used from [Quizlet.com](https://quizlet.com/117039332/javascript-quiz-flash-cards/)
