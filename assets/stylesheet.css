@@ -27,3 +27,7 @@ button{
 .endPage{
     display: none;
 }
+
+#results{
+    white-space: pre-line;
+}
