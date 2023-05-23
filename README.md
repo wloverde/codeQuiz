@@ -1,5 +1,7 @@
 # Code Quiz
-
+[Pages](https://wloverde.github.io/codeQuiz/)
+![alt text](./assets/img/endpage.JPG)
+![alt text](./assets/img/quiz.JPG)
 ## User Story
 A  timed multiple choice question generator that stores highscores locally
 
