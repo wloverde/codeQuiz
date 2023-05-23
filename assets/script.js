@@ -24,7 +24,7 @@ var questions = [
     },
     {
         question: "What is the correct JavaScript syntax to write \"Hello World\"?",
-        answers: ["response.write(\"Hello World\")", "\"Hello World\"", " document.write(\"Hello World\")", "(\"Hello World\")"],
+        answers: ["response.write(\"Hello World\")", "\"Hello World\"", "document.write(\"Hello World\")", "(\"Hello World\")"],
         correct: "document.write(\"Hello World\")"
     },
     {
@@ -114,12 +114,15 @@ function quizClick(event) {
         counter++;
         score++;
         renderQuestion();
+    } else {
+        timeCount = timeCount - 5;
     }
 }
 
 
 // add score to high score Object, sort by highest score to lowest
 function getHighScore() {
+    // checking local storage for highscore data, returning empty array if none found
     var highScore = (JSON.parse(localStorage.getItem("highScore")));
     if (highScore === null) {
         highScore = [];
@@ -139,12 +142,8 @@ function startTimer() {
         // decrements time and displays current time on page
         timeCount--;
         timerEl.textContent = "Seconds Remaining: " + timeCount;
-        if (questions[counter].correct !== buttonEl.value) {
-            timeCount = timeCount-5;
-        }
-
         if (timeCount >= 0) {
-            timeCount = 0;
+            timeCount--;
         } else {
             clearInterval(timer);
             endGame();
