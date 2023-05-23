@@ -119,7 +119,6 @@ function quizClick(event) {
     }
 }
 
-
 // add score to high score Object, sort by highest score to lowest
 function getHighScore() {
     // checking local storage for highscore data, returning empty array if none found
@@ -130,11 +129,10 @@ function getHighScore() {
     highScore.sort(function (a, b) {
         return b.score - a.score
     });
-    for (var i = 0; i < highScore.length; i++) {
+    for (var i = 0; (i < highScore.length) && (i<5); i++) {
         highScoresEl.children[i].textContent = highScore[i].name + " | " + highScore[i].score;
     }
 }
-
 
 // timer function for quiz. 
 function startTimer() {
@@ -151,7 +149,6 @@ function startTimer() {
 
     }, 1000);
 }
-
 
 // When I click the Start Button, the Timer Starts and the Quiz Displays
 startButton.addEventListener("click", startQuiz);
